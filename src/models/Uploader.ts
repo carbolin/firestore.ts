@@ -1,4 +1,4 @@
 export interface Uploader {
 
-    upload(): Promise<void>;
+    upload(data: any[]): Promise<void> | void;
 }
