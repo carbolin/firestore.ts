@@ -5,9 +5,9 @@ export class AppInitiator {
 
     constructor(protected firebaseConfig: FirebaseConfig) { }
 
-    protected init(): firebase.app.App {
+    protected init(): void {
 
-        return firebase.initializeApp(this.firebaseConfig);
+        firebase.initializeApp(this.firebaseConfig);
     }
 
 }
