@@ -1,5 +1,5 @@
-import * as firebase from 'firebase';
 import { FirebaseConfig } from './models/FirebaseConfig';
+import firebase from 'firebase';
 
 export class AppInitiator {
 

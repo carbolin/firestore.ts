@@ -1,6 +1,6 @@
 import { AppInitiator } from './app-initiator';
 import { FirebaseConfig } from './models/FirebaseConfig';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
 
 export class DbInitiator extends AppInitiator {

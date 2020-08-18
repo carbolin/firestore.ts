@@ -1,5 +1,5 @@
 import { Uploader } from './Uploader';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
 export class FirestoreUploader implements Uploader {
 
