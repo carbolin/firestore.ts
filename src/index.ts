@@ -9,7 +9,7 @@ import { complexCountries } from '../data/complex_countries_eu';
 const firestore = new DbInitiator(firebaseConfig);
 const db = firestore.dbInit();
 
-const uploader = new CollectionUploader(db, 'test');
+const uploader = new CollectionUploader(db, 'countries');
 
 uploader.upload(complexCountries);
 
