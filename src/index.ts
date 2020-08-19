@@ -9,7 +9,7 @@ import { DocumentUploader } from './upload/document-uploader';
 const firestore = new DbInitiator(firebaseConfig);
 const db = firestore.dbInit();
 
-const uploader = new DocumentUploader(db, 'test');
+const uploader = new DocumentUploader(db, 'data');
 
 uploader.upload(countries);
 
