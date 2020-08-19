@@ -9,6 +9,7 @@ lerna-debug.log*
 # My Files
 data/
 firebase-config.ts
+index.ts
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
