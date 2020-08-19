@@ -2,14 +2,14 @@ import { AppInitiator } from './app-initiator';
 import { firebaseConfig } from './firebase-config';
 import { DbInitiator } from './db-initiator';
 import { liechtenstein } from '../data/liechtenstein';
-import { countries } from '../data/conutries';
 import { CollectionUploader } from './upload/collection-uploader';
 import { DocumentUploader } from './upload/document-uploader';
+import { complexCountries } from '../data/complex_countries_eu';
 
 const firestore = new DbInitiator(firebaseConfig);
 const db = firestore.dbInit();
 
-const uploader = new DocumentUploader(db, 'data');
+const uploader = new CollectionUploader(db, 'test');
 
-uploader.upload(countries);
+uploader.upload(complexCountries);
 
