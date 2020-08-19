@@ -1,21 +1,21 @@
 import { Uploader } from './Uploader';
-import firebase from 'firebase/app';
+import { firestore } from 'firebase';
 
-export class FirestoreUploader implements Uploader {
+export class CollectionUploader implements Uploader {
 
-    constructor(private db: firebase.firestore.Firestore, private collection: string) { }
+    constructor(private db: firestore.Firestore, private collection: string) { }
 
     async upload(data: any[]): Promise<void> {
 
         if (data.length <= 500) {
 
-            const batch: firebase.firestore.WriteBatch = this.db.batch();
+            const batch: firestore.WriteBatch = this.db.batch();
 
-            const collectionRef: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>
+            const collectionRef: firestore.CollectionReference<firestore.DocumentData>
                 = this.db.collection(this.collection);
 
-            data.forEach((doc: firebase.firestore.DocumentData) => {
-                const docRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>
+            data.forEach((doc: firestore.DocumentData) => {
+                const docRef: firestore.DocumentReference<firestore.DocumentData>
                     = collectionRef.doc();
 
                 batch.set(docRef, doc);
