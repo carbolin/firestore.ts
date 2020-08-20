@@ -21,7 +21,7 @@ export class CollectionUpdater<T> implements Updater<T> {
 
         try {
             const snaps: firestore.QuerySnapshot<firestore.DocumentData> = await collectionRef.get();
-            snaps.docs.forEach(doc => {
+            snaps.docs.forEach((doc: firestore.QueryDocumentSnapshot<firestore.DocumentData>) => {
 
                 const docRef: firestore.DocumentReference<firestore.DocumentData> = doc.ref;
 
