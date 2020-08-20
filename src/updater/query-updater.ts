@@ -15,7 +15,7 @@ export class QueryUpdater<T> implements Updater<T> {
         try {
 
             const snaps: firestore.QuerySnapshot<firestore.DocumentData>
-                = await this.db.collection(this.collection).where('code', '==', '7002').get();
+                = await this.db.collection(this.collection).where('alpha2Code', '==', 'lu').get();
 
             snaps.docs.forEach((doc: firestore.QueryDocumentSnapshot<firestore.DocumentData>) => {
 
