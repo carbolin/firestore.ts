@@ -7,6 +7,9 @@ export class CollectionUploader implements Uploader {
 
     async upload(data: any[]): Promise<void> {
 
+        console.log('Anzahl der Dokumente: ', data.length);
+
+
         if (data.length <= 500) {
 
             const batch: firestore.WriteBatch = this.db.batch();
@@ -14,16 +17,19 @@ export class CollectionUploader implements Uploader {
             const collectionRef: firestore.CollectionReference<firestore.DocumentData>
                 = this.db.collection(this.collection);
 
+            const FieldValue = firestore.FieldValue;
+
+
             data.forEach((doc: firestore.DocumentData) => {
                 const docRef: firestore.DocumentReference<firestore.DocumentData>
                     = collectionRef.doc();
 
-                batch.set(docRef, doc);
+                batch.set(docRef, { ...doc, timestamp: FieldValue.serverTimestamp() });
             });
 
             try {
                 await batch.commit();
-                console.log(`Uploaded ${data.length} Documents finished`);
+                console.log(`Uploaded ${data.length} Documents`);
                 process.exit(0);
             }
             catch (e) {
