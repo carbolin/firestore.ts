@@ -1,30 +1,23 @@
-import { Uploader } from './Uploader';
-import { firestore } from 'firebase';
+import { doc, Firestore, writeBatch } from 'firebase/firestore/lite';
+
+import { Uploader } from './uploader';
 
 export class CollectionUploader implements Uploader {
 
-    constructor(private db: firestore.Firestore, private collection: string) { }
+    constructor(private db: Firestore, private collection: string) { }
 
     async upload(data: any[]): Promise<void> {
 
         console.log('Anzahl der Dokumente: ', data.length);
 
-
         if (data.length <= 500) {
 
-            const batch: firestore.WriteBatch = this.db.batch();
+            const batch = writeBatch(this.db);
 
-            const collectionRef: firestore.CollectionReference<firestore.DocumentData>
-                = this.db.collection(this.collection);
+            data.forEach(document => {
+                const docRef = doc(this.db, this.collection);
 
-            const FieldValue = firestore.FieldValue;
-
-
-            data.forEach((doc: firestore.DocumentData) => {
-                const docRef: firestore.DocumentReference<firestore.DocumentData>
-                    = collectionRef.doc();
-
-                batch.set(docRef, { ...doc, timestamp: FieldValue.serverTimestamp() });
+                batch.set(docRef, { ...document });
             });
 
             try {
@@ -32,11 +25,12 @@ export class CollectionUploader implements Uploader {
                 console.log(`Uploaded ${data.length} Documents`);
                 process.exit(0);
             }
-            catch (e) {
-                console.log(e.message, 'Error');
+            catch (error) {
+                if (error instanceof Error) {
+                    console.log(error.message, 'Error');
+                }
                 process.exit(-1);
             }
-
         } else
             console.log('Maximum number of Documents for Upload exceeded');
     }
