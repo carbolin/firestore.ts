@@ -1,4 +1,6 @@
 {
+  "include": ["src/**/*"],
+  "exclude": ["src/data/*"],
   "compilerOptions": {
     "lib": [
       "es2021"
